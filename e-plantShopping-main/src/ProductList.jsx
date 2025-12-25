@@ -48,7 +48,7 @@ function ProductList({ onHomeClick }) {
             amnt += item.quantity;
         })
         setTotalCartItems(amnt);
-        // console.log(totalCartItems);
+        console.log(totalCartItems);
     }
 
     function handleAddToCart(e, name, category) {
@@ -99,7 +99,8 @@ function ProductList({ onHomeClick }) {
                         Plants
                     </a>
 
-                    <a href="#" onClick={handleCartClick} className="cart">
+                <a href="#" onClick={handleCartClick} className="cart">
+                    <div className="cart-icon-wrapper">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" height="68" width="68">
                             <rect width="156" height="156" fill="none"></rect>
                             <circle cx="80" cy="216" r="12"></circle>
@@ -113,7 +114,14 @@ function ProductList({ onHomeClick }) {
                                 strokeWidth="2"
                             ></path>
                         </svg>
-                    </a>
+
+                        <span className="cart-count-inside">
+                            {totalCartItems}
+                        </span>
+
+                    </div>
+                </a>
+
                 </div>
             </div>
 
