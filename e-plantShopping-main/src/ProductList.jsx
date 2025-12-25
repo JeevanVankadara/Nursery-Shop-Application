@@ -1,15 +1,25 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './ProductList.css'
 import CartItem from './CartItem';
 import PLants from './data/Plants.js';
+import { useSelector, useDispatch } from 'react-redux';
+import { addItem, removeItem } from './CartSlice.jsx';
 
 function ProductList({ onHomeClick }) {
+
+    const cartItems = useSelector((state) => state.cart);
+    const dispatch = useDispatch();
+
+    const [totalCartItems, setTotalCartItems] = useState(0);
+
+    useEffect(() => {
+        findTotalCartItems();
+    }, [cartItems]);
+
     const [showCart, setShowCart] = useState(false);
     const [showPlants, setShowPlants] = useState(false); // State to control the visibility of the About Us page
 
     const plantsArray = PLants;
-
-    console.log(plantsArray);
 
     const handleHomeClick = (e) => {
         e.preventDefault();
@@ -31,6 +41,39 @@ function ProductList({ onHomeClick }) {
         e.preventDefault();
         setShowCart(false);
     };
+
+    function findTotalCartItems() {
+        let amnt = 0;
+        cartItems.forEach((item) => {
+            amnt += item.quantity;
+        })
+        setTotalCartItems(amnt);
+        // console.log(totalCartItems);
+    }
+
+    function handleAddToCart(e, name, category) {
+        e.preventDefault();
+        dispatch(addItem({ name, category }));
+    }
+
+    function AlreadyHumneAddkiya(name) {
+        let content = "Add to Cart";
+        cartItems.forEach((item) => {
+            if (item.name === name) {
+                content = 'Already Added';
+            }
+        })
+        return content;
+    }
+
+    function isPlantPresent(name) {
+        let flag = false;
+        cartItems.forEach((item) => {
+            if (item.name === name) flag = true;
+        })
+
+        return flag;
+    }
 
     return (
         <div className="product-page">
@@ -99,9 +142,14 @@ function ProductList({ onHomeClick }) {
                                                         <h3 className="product-title">{plant.name}</h3>
                                                         <p className="product-desc">{plant.description}</p>
                                                         <h4 className="product-price">{plant.cost}</h4>
-                                                        <button className="product-button">
-                                                            Add To Cart
+                                                        <button
+                                                            className="product-button"
+                                                            disabled={isPlantPresent(plant.name)}
+                                                            onClick={(e) => handleAddToCart(e, plant.name, plantModel.category)}
+                                                        >
+                                                            {AlreadyHumneAddkiya(plant.name)}
                                                         </button>
+
                                                     </div>
                                                 )
                                             })

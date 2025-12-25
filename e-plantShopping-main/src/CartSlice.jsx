@@ -2,12 +2,12 @@ import { createSlice } from '@reduxjs/toolkit';
 
 export const CartSlice = createSlice({
   name: 'cart',
-  initialState: {
-    items: [], // Initialize items as an empty array
-  },
+  initialState: [],
   reducers: {
     addItem: (state, action) => {
-    
+      const {name,category} = action.payload;
+      const quantity = 1;
+      state.push({name, category, quantity});
     },
     removeItem: (state, action) => {
     },
