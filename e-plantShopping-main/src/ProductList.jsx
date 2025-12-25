@@ -48,12 +48,11 @@ function ProductList({ onHomeClick }) {
             amnt += item.quantity;
         })
         setTotalCartItems(amnt);
-        console.log(totalCartItems);
     }
 
-    function handleAddToCart(e, name, category) {
+    function handleAddToCart(e, name, category, image, cost) {
         e.preventDefault();
-        dispatch(addItem({ name, category }));
+        dispatch(addItem({ name, category, image, cost }));
     }
 
     function AlreadyHumneAddkiya(name) {
@@ -153,7 +152,7 @@ function ProductList({ onHomeClick }) {
                                                         <button
                                                             className="product-button"
                                                             disabled={isPlantPresent(plant.name)}
-                                                            onClick={(e) => handleAddToCart(e, plant.name, plantModel.category)}
+                                                            onClick={(e) => handleAddToCart(e, plant.name, plantModel.category, plant.image, plant.cost)}
                                                         >
                                                             {AlreadyHumneAddkiya(plant.name)}
                                                         </button>
