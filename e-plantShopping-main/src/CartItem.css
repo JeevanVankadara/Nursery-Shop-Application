@@ -241,3 +241,128 @@
     margin-top: 20px;
   }
   
+  /* Modal Styles */
+  .modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  .modal-content {
+    background-color: white;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+    position: relative;
+    max-width: 500px;
+    width: 90%;
+    animation: slideUp 0.3s ease;
+  }
+  
+  @keyframes slideUp {
+    from {
+      transform: translateY(50px);
+      opacity: 0;
+    }
+    to {
+      transform: translateY(0);
+      opacity: 1;
+    }
+  }
+  
+  .modal-close {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 32px;
+    cursor: pointer;
+    color: #999;
+    line-height: 1;
+    padding: 0;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: color 0.2s ease;
+  }
+  
+  .modal-close:hover {
+    color: #333;
+  }
+  
+  /* ReachOut Component Styles */
+  .reachout-container {
+    text-align: center;
+    padding: 20px 0;
+  }
+  
+  .reachout-title {
+    color: #4caf50;
+    font-size: 24px;
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  
+  .reachout-content {
+    color: #333;
+  }
+  
+  .reachout-message {
+    font-size: 16px;
+    margin-bottom: 15px;
+    color: #555;
+  }
+  
+  .reachout-info {
+    font-size: 15px;
+    margin-bottom: 20px;
+    color: #666;
+  }
+  
+  .reachout-email {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    padding: 15px;
+    background-color: #f5f5f5;
+    border-radius: 8px;
+    margin-top: 15px;
+  }
+  
+  .reachout-email svg {
+    color: #4caf50;
+    flex-shrink: 0;
+  }
+  
+  .reachout-link {
+    color: #4caf50;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 15px;
+    word-break: break-all;
+  }
+  
+  .reachout-link:hover {
+    text-decoration: underline;
+  }

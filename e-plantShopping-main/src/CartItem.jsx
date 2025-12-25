@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { removeItem, updateQuantity } from './CartSlice';
 import './CartItem.css';
+import ReachOut from './ReachOut';
 
 const CartItem = ({ onContinueShopping }) => {
 
   const [totalAmnt, setTotalAmnt] = useState(0);
+  const [showModal, setShowModal] = useState(false);
 
   const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
@@ -28,7 +30,14 @@ const CartItem = ({ onContinueShopping }) => {
     onContinueShopping(e);
   };
 
+  const handleCheckout = (e) => {
+    e.preventDefault();
+    setShowModal(true);
+  };
 
+  const handleCloseModal = () => {
+    setShowModal(false);
+  };
 
   const handleIncrement = (item) => {
     const name = item.name;
@@ -82,8 +91,17 @@ const CartItem = ({ onContinueShopping }) => {
       <div className="continue_shopping_btn">
         <button className="get-started-button" onClick={(e) => handleContinueShopping(e)}>Continue Shopping</button>
         <br />
-        <button className="get-started-button1">Checkout</button>
+        <button className="get-started-button1" onClick={handleCheckout}>Checkout</button>
       </div>
+
+      {showModal && (
+        <div className="modal-overlay" onClick={handleCloseModal}>
+          <div className="modal-content" onClick={(e) => e.stopPropagation()}>
+            <button className="modal-close" onClick={handleCloseModal}>×</button>
+            <ReachOut />
+          </div>
+        </div>
+      )}
     </div>
   );
 };
